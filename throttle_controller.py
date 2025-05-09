@@ -1,6 +1,9 @@
 import numpy as np
 
 def throttle_controller(target_vel, cur_vel, error_integral):
+    ################################################################################################################
+    #PID Controller to control throttle force for the vehicle
+    ################################################################################################################
     if not errorlist:
         errorlist = 0
     
@@ -8,9 +11,9 @@ def throttle_controller(target_vel, cur_vel, error_integral):
     error = target_vel - cur_vel
 
     #Gains - Untuned
-    Pgain = 175
-    Igain = 37
-    Dgain = .4
+    Pgain = 1
+    Igain = 0
+    Dgain = 0
 
     #Derivatives
     errorlist(len(errorlist)+1) = error
