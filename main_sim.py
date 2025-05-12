@@ -1,5 +1,6 @@
 import numpy as np
 import scipy
+from bicycle_system import bicycle_system
 
 start = [5,4]
 goal = [100,70]
