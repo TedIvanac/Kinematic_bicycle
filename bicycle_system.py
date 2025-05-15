@@ -9,28 +9,28 @@ from kinematics_description import Kinematics_Description
 def bicycle_system(time, init_state):
     
     #Initial State
-    x_coord = init_state(0) #starting y coordinate
-    y_coord = init_state(1) #starting y coordinate
-    theta = init_state(2) #Starting orientation of vehicle
-    vel = init_state(3) #initial velocity
-    int_e_v = init_state(4)
-    int_e_s = init_state(5)
+    x_coord = init_state[0] #starting y coordinate
+    y_coord = init_state[1] #starting y coordinate
+    theta = init_state[2] #Starting orientation of vehicle
+    vel = init_state[3] #initial velocity
+    int_e_v = init_state[4]
+    int_e_s = init_state[5]
 
     #speed setpoint for the vehicle
     speed = 5
 
     #Stop car if all waypoints have been reached
-    if(waypointX != float('inf')):
+    if np.any(waypointX != float('inf')):
         waypoint_counter = 0
         while(waypoint_counter < len(waypointX)):
             #calculate difference arrays between waypoints and current coordinates
-            xdiff = waypointX(waypoint_counter) - x_coord
-            ydiff = waypointY(waypoint_counter) - y_coord
+            xdiff = waypointX[waypoint_counter] - x_coord
+            ydiff = waypointY[waypoint_counter] - y_coord
             #use atan2 to find the angle vehicle must be at to reach next point
             angle = np.atan2(xdiff,ydiff)
 
             #giving some tolerance for reaching the waypoint
-            diff = np.sqrt((xdiff^2)+(ydiff^2))
+            diff = np.sqrt((xdiff**2)+(ydiff**2))
             if(diff <= .5):
                 print("Waypoint Reached!")
                 waypoint_counter += 1
@@ -53,6 +53,6 @@ def bicycle_system(time, init_state):
         err_theta = 0
         out = np.array([0,0,0,.02])
     
-    dydt = np.array[out,err_throttle,err_theta]
+    dydt = np.array([*out,err_throttle,err_theta])
     return dydt
 

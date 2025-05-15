@@ -4,8 +4,9 @@ def throttle_controller(target_vel, cur_vel, error_integral):
     ################################################################################################################
     #PID Controller to control throttle force for the vehicle
     ################################################################################################################
-    if not errorlist:
-        errorlist = 0
+    
+    #if not throttle_controller.errorlist:
+       # throttle_controller.errorlist = 0
     
     #error = target velocity - current velocity
     error = target_vel - cur_vel
@@ -15,9 +16,10 @@ def throttle_controller(target_vel, cur_vel, error_integral):
     Igain = 0
     Dgain = 0
 
-    #Derivatives
-    errorlist(len(errorlist)+1) = error
-    der_error = errorlist(len(errorlist)-1) - errorlist(len(errorlist-1)-1)
+    #Derivative
+    #errorlist(len(errorlist)+1) = error
+    throttle_controller.errorlist = np.append(throttle_controller.errorlist,error)
+    der_error = throttle_controller.errorlist[-1] - throttle_controller.errorlist[-2]
 
     # PID
     P = Pgain*error
@@ -29,3 +31,5 @@ def throttle_controller(target_vel, cur_vel, error_integral):
     
     vel_ctrl = [P, error]
     return np.array(vel_ctrl)
+
+throttle_controller.errorlist = np.array([])

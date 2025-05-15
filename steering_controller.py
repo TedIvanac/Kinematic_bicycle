@@ -4,8 +4,8 @@ def steering_controller(target_angle, cur_angle, error_integral):
     ################################################################################################################
     #PID Controller to control steering for the vehicle
     ################################################################################################################
-    if not errorlist:
-        errorlist = 0
+    if not steering_controller.errorlist:
+        steering_controller.errorlist = 0
     
     #error = target steering angle - current steering angle
     error = target_angle - cur_angle
@@ -16,8 +16,8 @@ def steering_controller(target_angle, cur_angle, error_integral):
     Dgain = 0
 
     #Derivatives
-    errorlist(len(errorlist)+1) = error
-    der_error = errorlist(len(errorlist)-1) - errorlist(len(errorlist-1)-1)
+    steering_controller.errorlist += error
+    der_error = steering_controller.errorlist(len(steering_controller.errorlist)-1) - steering_controller.errorlist(len(steering_controller.errorlist-1)-1)
 
     # PID
     P = Pgain*error
@@ -28,3 +28,5 @@ def steering_controller(target_angle, cur_angle, error_integral):
     PI = P+I+D
     steer_ctrl = [PI, error]
     return np.array(steer_ctrl)
+
+steering_controller.errorlist = 0

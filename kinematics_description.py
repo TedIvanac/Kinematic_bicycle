@@ -7,10 +7,10 @@ def Kinematics_Description(state):
     ################################################################################################################
 
     #extract state variables for vehicle from input
-    theta = state(0) #yaw of vehicle
-    delta = state(1) #steering wheel angle of vehicle
-    v = state(2) #velocity of vehicle
-    throttle = state(3) #throttle force of vehicle
+    theta = state[0] #yaw of vehicle
+    delta = state[1] #steering wheel angle of vehicle
+    v = state[2] #velocity of vehicle
+    throttle = state[3] #throttle force of vehicle
 
     # Bicycle Model Parameters
     m = 1519.988   # Mass of the bicycle and rider (kg)
@@ -33,5 +33,5 @@ def Kinematics_Description(state):
     acceleration = (throttle - W*math.sin(theta_g) - f*W*math.cos(theta_g) - Da) / m
 
     # Create a column vector with derivatives of x, y, theta, delta, and v
-    output_state = [Xdot, Ydot,Omega, acceleration]
-    return np.array(output_state)
+    output_state = np.array([Xdot, Ydot,Omega, acceleration])
+    return output_state
