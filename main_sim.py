@@ -10,10 +10,11 @@ import matplotlib.pyplot as plt
 x = 0 #starting y coordinate
 y = 0 #starting y coordinate
 Theta = 0 #Starting orientation of vehicle
-vel = 8 #initial velocity
-int_e_v = 0
-int_e_s = 0
-init_state = np.array([x,y,Theta,vel,int_e_v,int_e_s])
+vel = 0 #initial velocity
+#int_e_v = 0
+#int_e_s = 0
+#init_state = np.array([x,y,Theta,vel,int_e_v,int_e_s])
+init_state = np.array([x,y,Theta,vel])
 
 #Time parameters
 t_end = 60
@@ -23,7 +24,7 @@ time = np.arange(0,t_end,dt)
 output_state = np.empty([6,1])
 
 #solve odes using runge-kutta 4,5
-output_state = solve_ivp(bicycle_system,[0, t_end], init_state, t_eval=time)
+output_state = solve_ivp(bicycle_system,[dt, t_end], init_state)
 
 #Initialize arrays to store results
 t = output_state.t

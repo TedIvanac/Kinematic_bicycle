@@ -25,7 +25,7 @@ def Kinematics_Description(state):
     f = 0.02       # coeff of rolling resistance
     theta_g = 0    # Angle of vehicle with ground
 
-    Da = .5*rho*Cd*A*(v + uw)^2    # Aerodynamic drag of vehicle
+    Da = .5*rho*Cd*A*(v + uw)**2    # Aerodynamic drag of vehicle
 
     Xdot = v * math.cos(theta)
     Ydot = v * math.sin(theta)
